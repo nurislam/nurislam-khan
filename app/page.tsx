@@ -40,7 +40,7 @@ export default function Home() {
 
             <div className="mt-4 flex gap-3">
               <a href="mailto:nurislam.cse@gmail.com" className="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md">Email</a>
-              <a href="/" className="inline-block border border-gray-300 px-4 py-2 rounded-md">Download CV (PDF)</a>
+              <a href="/Md-Nur-Islam-Khan.pdf" className="inline-block border border-gray-300 px-4 py-2 rounded-md">Download CV (PDF)</a>
             </div>
           </div>
         </section>
