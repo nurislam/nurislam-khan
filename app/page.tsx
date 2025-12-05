@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      <header className="bg-white shadow">
+      <header className="bg-white shadow fixed top-0 left-0 w-full z-50">
         <div className="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Md. Nur Islam Khan</h1>
@@ -21,7 +21,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-6 py-12">
+      <main className="max-w-5xl mx-auto px-6 py-12 pt-32">
         {/* Hero */}
         <section className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-40 h-40 rounded-full overflow-hidden shadow-lg flex-shrink-0">
