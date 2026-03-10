@@ -149,6 +149,14 @@ export default function Home() {
 
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Tawsel - POS, Accounts, Full E-commerce</h4>
+              <div className="text-sm text-gray-600">tawsel.io</div>
+              <div className="mt-2 text-sm">Tech: Node.js, Next.js, LoopBack 4, Material Design, Stripe, PayPal. Accounts data management platform for the United Arab Emirates
+ client.</div>
+            </div>
+            
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white p-4 rounded-lg shadow">
               <h4 className="font-semibold">Medicase - eCRF</h4>
               <div className="text-sm text-gray-600">dev.medicase.io</div>
               <div className="mt-2 text-sm">Tech: Node.js, Next.js, LoopBack 4, Material Design, Stripe, PayPal. Clinical data management (eCRF) platform for Sweden-based client.</div>
