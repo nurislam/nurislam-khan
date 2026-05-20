@@ -1,13 +1,35 @@
 import Image from 'next/image';
 
+const CAREER_START = new Date(2012, 0, 1); // Jan 2012 — AskBangladesh.com Limited
+
+function yearsOfExperience(from: Date): number {
+  const now = new Date();
+  let years = now.getFullYear() - from.getFullYear();
+  const monthDiff = now.getMonth() - from.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < from.getDate())) {
+    years--;
+  }
+  return years;
+}
+
+function WebsiteLink({ domain, label }: { domain: string; label?: string }) {
+  const href = domain.startsWith('http') ? domain : `https://${domain}`;
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="underline hover:text-indigo-700">
+      {label ?? domain}
+    </a>
+  );
+}
+
 export default function Home() {
+  const experienceYears = yearsOfExperience(CAREER_START);
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <header className="bg-white shadow fixed top-0 left-0 w-full z-50">
         <div className="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Md. Nur Islam Khan</h1>
-            <p className="text-sm text-gray-600">Lead Full-Stack Engineer — Dropndot Solutions</p>
+            <p className="text-sm text-gray-600">Lead Full-Stack Engineer — <WebsiteLink domain="dropndot.com" label="Dropndot Solutions" /></p>
           </div>
           <div className="text-right text-sm text-gray-600">
             <div>Garden City, Bosila, Mohammadpur, Dhaka-1207</div>
@@ -32,9 +54,9 @@ export default function Home() {
           <div>
             <h2 className="text-2xl font-semibold">About</h2>
             <p className="mt-3 text-gray-700">
-              I’m a dedicated Full-Stack Developer with over 13 years of experience in developing and designing
+              I’m a dedicated Full-Stack Developer with over {experienceYears} years of experience in developing and designing
               dynamic web applications using Node.js, PHP frameworks, and Shopify Apps. Currently serving as Lead
-              Full-Stack Developer at Dropndot Solutions, I focus on scalable architectures, performance optimization,
+              Full-Stack Developer at <WebsiteLink domain="dropndot.com" label="Dropndot Solutions" />, I focus on scalable architectures, performance optimization,
               and team leadership.
             </p>
 
@@ -51,33 +73,49 @@ export default function Home() {
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
             <div>
               <strong>Core Technologies:</strong>
-              <div>Node.js, PHP (Laravel, Yii, CodeIgniter, CakePHP), LoopBack, Shopify App/Theme Development, REST & GraphQL, Microservices</div>
+              <div>PHP (Laravel, CodeIgniter, CakePHP, Yii), Node.js, LoopBack, Expert in Data Parsing in n8n, Shopify App/Theme Development, REST & GraphQL APIs, Microservices Architecture</div>
 
               <strong className="mt-3 block">Front-End & UI:</strong>
-              <div>React.js, Next.js, React Router, JavaScript (ES6+), jQuery, HTML5, CSS3, Tailwind CSS, Bootstrap, Responsive Design</div>
+              <div>React.js, TypeScript, Next.js, React Router, JavaScript (ES6+), jQuery, HTML5, CSS3, Tailwind CSS, Bootstrap, Responsive Design, UI/UX Best Practices</div>
 
               <strong className="mt-3 block">Databases & Data Management:</strong>
               <div>MySQL, PostgreSQL, MongoDB, Redis, Database Design & Optimization, Data Migration</div>
+
+              <strong className="mt-3 block">Payment & Integration:</strong>
+              <div>Stripe, PayPal, Authorize.Net, Bank APIs, Bkash API, Mobile Wallet Integrations</div>
             </div>
 
             <div>
-              <strong>Payment & Integration:</strong>
-              <div>Stripe, PayPal, Authorize.Net, Bank APIs, Bkash API, Mobile Wallet Integrations</div>
+              <strong>DevOps & Tools:</strong>
+              <div>Git, GitHub/GitLab, CI/CD, Docker, Composer, NPM, Elasticsearch, Unit & Integration Testing, AWS</div>
 
-              <strong className="mt-3 block">DevOps & Tools:</strong>
-              <div>Git, GitHub/GitLab, CI/CD, Docker, Composer, NPM, Elasticsearch, Unit & Integration Testing</div>
+              <strong className="mt-3 block">Project Management & Agile:</strong>
+              <div>Agile methodologies, Scrum, Kanban, Scrum Master, Jira, Trello, Reporting & Documentation</div>
 
-              <strong className="mt-3 block">Project Management & Leadership:</strong>
-              <div>Agile, Scrum, Kanban, Jira, Trello, Team Management, Technical Planning, Code Review, Mentoring</div>
+              <strong className="mt-3 block">Leadership & Collaboration:</strong>
+              <div>Team Management, Technical Planning, Code Review, Mentoring, Cross-Functional Coordination, Stakeholder Communication</div>
 
               <strong className="mt-3 block">Additional Strengths:</strong>
-              <div>Problem Solving, Performance Optimization, Security Best Practices, Cloud Deployment (AWS, Heroku, DigitalOcean)</div>
+              <div>Problem Solving, Critical Thinking, Performance Optimization, Security Best Practices</div>
+
+              <strong className="mt-3 block">Specialized skill:</strong>
+              <div>Quick learner, Fast coder, and I can do better than explain.
+              </div>
             </div>
           </div>
 
           <div className="mt-4">
             <strong>Languages:</strong>
-            <div className="text-sm text-gray-700 mt-1">English (Full Professional) • Hindi (Full Professional) • Bengali (Native)</div>
+            <div className="text-sm text-gray-700 mt-1">English (Full Professional) • Hindi (Full Professional) • Bengali (Native or Bilingual)</div>
+          </div>
+        </section>
+
+        {/* Education */}
+        <section className="mt-8 bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-semibold">Education</h3>
+          <div className="mt-3 text-sm text-gray-700">
+            <div><strong>Bangladesh Institute of Science & Technology (BIST)</strong> — MSc. in Computer Science, 2009</div>
+            <div className="mt-2"><strong>Institute of Science & Technology (Under National University)</strong> — BSc. in Computer Science, 2008</div>
           </div>
         </section>
 
@@ -89,7 +127,7 @@ export default function Home() {
             <article className="bg-white p-6 rounded-lg shadow">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="font-semibold">Lead Full-Stack Engineer — Dropndot Solutions</h4>
+                  <h4 className="font-semibold">Lead Full-Stack Engineer — <WebsiteLink domain="dropndot.com" label="Dropndot Solutions" /></h4>
                   <div className="text-sm text-gray-600">Sep 2022 – Present • Eskaton, Dhaka</div>
                 </div>
                 <div className="text-sm text-gray-600">Key: Code Review, Technical Planning, Team Management, Docker, CI/CD, Node.js, Shopify Apps</div>
@@ -100,7 +138,7 @@ export default function Home() {
             <article className="bg-white p-6 rounded-lg shadow">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="font-semibold">Senior Software Engineer — Dropndot Solutions</h4>
+                  <h4 className="font-semibold">Senior Software Engineer — <WebsiteLink domain="dropndot.com" label="Dropndot Solutions" /></h4>
                   <div className="text-sm text-gray-600">Sep 2015 – Sep 2022</div>
                 </div>
                 <div className="text-sm text-gray-600">Key: LoopBack, MongoDB, PHP, Next.js, Laravel, Docker, Elasticsearch</div>
@@ -111,7 +149,7 @@ export default function Home() {
             <article className="bg-white p-6 rounded-lg shadow">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="font-semibold">Software Engineer — Dropndot Solutions</h4>
+                  <h4 className="font-semibold">Software Engineer — <WebsiteLink domain="dropndot.com" label="Dropndot Solutions" /></h4>
                   <div className="text-sm text-gray-600">Jul 2012 – Sep 2015</div>
                 </div>
                 <div className="text-sm text-gray-600">Key: Laravel, OpenCart, Shopify, WooCommerce</div>
@@ -122,7 +160,7 @@ export default function Home() {
             <article className="bg-white p-6 rounded-lg shadow">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="font-semibold">Software Developer Consultant — PEARL Consultant Ltd (Part-time)</h4>
+                  <h4 className="font-semibold">Software Developer Consultant — <WebsiteLink domain="pearlbd.com" label="PEARL Consultant Ltd" /> (Part-time)</h4>
                   <div className="text-sm text-gray-600">Oct 2015 – Nov 2022 • Kathal Bagan, Dhaka</div>
                 </div>
                 <div className="text-sm text-gray-600">Key: QA Leadership, Testing, Reporting</div>
@@ -133,7 +171,7 @@ export default function Home() {
             <article className="bg-white p-6 rounded-lg shadow">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="font-semibold">Web Developer — AskBangladesh.com Limited</h4>
+                  <h4 className="font-semibold">Web Developer — <WebsiteLink domain="askBangladesh.com" label="AskBangladesh.com Limited" /></h4>
                   <div className="text-sm text-gray-600">Jan 2012 – Jul 2012 • Kawran Bazar, Dhaka</div>
                 </div>
                 <div className="text-sm text-gray-600">Key: PHP, MySQL, PayPal, Authorize.Net</div>
@@ -149,85 +187,147 @@ export default function Home() {
 
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Tawsel - POS, Accounts, Full E-commerce</h4>
-              <div className="text-sm text-gray-600">tawsel.io</div>
-              <div className="mt-2 text-sm">Tech: Node.js, Next.js, LoopBack 4, Material Design, Stripe, PayPal. Accounts data management platform for the United Arab Emirates
- client.</div>
+              <h4 className="font-semibold">Tawseil (Restaurants, Stores, Food and Delivery Marketplace) — POS, Accounts, Full E-commerce</h4>
+              <div className="text-sm text-gray-600">
+                <WebsiteLink domain="www.tawseil.co" /> • 2 years 
+              </div>
+              <div className="mt-2 text-sm text-gray-700">
+                <div><strong>Tech:</strong> Laravel API, Node.js, MySQL, TypeScript, MUI, Firebase</div>
+                <div className="mt-1"><strong>Role (Team Lead):</strong> Designed backend architecture, developed Laravel APIs, and managed app architecture.</div>
+                <div className="mt-1"><strong>Achievements:</strong> Payment integration, mobile SMS integration.</div>
+              </div>
             </div>
-            
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Carbazar — Automotive Buy & Sell Marketplace</h4>
+              <div className="text-sm text-gray-600">
+                <WebsiteLink domain="www.carbazar.com.bd" /> • 2.5 months
+              </div>
+              <div className="mt-2 text-sm text-gray-700">
+                <div><strong>Tech:</strong> Laravel API, Node.js, MySQL, TypeScript, MUI, Firebase</div>
+                <div className="mt-1"><strong>Role (Team Lead):</strong> Designed backend architecture, developed Laravel APIs, and managed app architecture.</div>
+                <div className="mt-1"><strong>Achievements:</strong> Payment integration, mobile SMS integration.</div>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Asthamart — E-commerce Marketplace</h4>
+              <div className="text-sm text-gray-600">
+                <WebsiteLink domain="www.asthamart.com.bd" /> • 3 months
+              </div>
+              <div className="mt-2 text-sm text-gray-700">
+                <div><strong>Tech:</strong> Laravel API, Node.js, MySQL, TypeScript, MUI, Firebase</div>
+                <div className="mt-1"><strong>Role (Team Lead):</strong> Designed backend architecture, developed Laravel APIs, and managed app architecture.</div>
+                <div className="mt-1"><strong>Achievements:</strong> Payment integration, mobile SMS integration.</div>
+              </div>
+            </div>
+
             <div className="bg-white p-4 rounded-lg shadow">
               <h4 className="font-semibold">Medicase - eCRF</h4>
-              <div className="text-sm text-gray-600">dev.medicase.io</div>
-              <div className="mt-2 text-sm">Tech: Node.js, Next.js, LoopBack 4, Material Design, Stripe, PayPal. Clinical data management (eCRF) platform for Sweden-based client.</div>
+              <div className="text-sm text-gray-600"><WebsiteLink domain="dev.medicase.io" /></div>
+              <div className="mt-2 text-sm">
+                Tech: Node.js, Next.js, LoopBack 4, Material Design, Stripe, PayPal. Clinical data management
+                (eCRF) platform for Sweden-based client.
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Bangladesh Yellowbook — Business directory in Bangladesh</h4>
+              <div className="text-sm text-gray-600">
+                <WebsiteLink domain="www.bangladeshyellowbook.com" /> • 16 months (completed before deadline)
+              </div>
+              <div className="mt-2 text-sm text-gray-700">
+                <div><strong>Tech:</strong> Laravel, Elasticsearch, AJAX, reCAPTCHA v3, MySQL/MariaDB, Stripe</div>
+                <div className="mt-1"><strong>Role (Sr. Software Engineer):</strong> Developed backend services, search system, and authentication with group-wise role-based access.</div>
+                <div className="mt-1"><strong>Achievements:</strong> Implemented Elasticsearch for fast user search and optimized backend APIs, reducing response time by 60%.</div>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Students Management — All-in-one solution for schools, colleges, institutes, and universities</h4>
+              <div className="text-sm text-gray-600">
+                <WebsiteLink domain="www.afmccdt.org" /> • 18 months (completed before deadline)
+              </div>
+              <div className="mt-2 text-sm text-gray-700">
+                <div><strong>Tech:</strong> CodeIgniter, MySQL, jQuery, Bootstrap, Bkash</div>
+                <div className="mt-1"><strong>Role (Team Lead):</strong> Acted as lead database architect, designed backend and API structure, and oversaw full deployment.</div>
+                <div className="mt-1"><strong>Achievements:</strong> Built a high-performance student management app for attendance, student fees, and student result processing.</div>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">DeshiBiz - Directory</h4>
+              <div className="text-sm text-gray-600"><WebsiteLink domain="deshibiz.com" /></div>
+              <div className="mt-2 text-sm">
+                Tech: CakePHP, MySQL, Bootstrap — Business listing and profiles.
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Gold Belly - E-commerce</h4>
+              <div className="text-sm text-gray-600"><WebsiteLink domain="goldbelly.com" /></div>
+              <div className="mt-2 text-sm">
+                Tech: Next.js, MUI, MySQL, Stripe — Gourmet food & delivery platform.
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Phoenix Card - E-commerce</h4>
+              <div className="text-sm text-gray-600"><WebsiteLink domain="phoenitcg.com" /></div>
+              <div className="mt-2 text-sm">
+                Tech: WordPress, WooCommerce, Stripe — Online store build.
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Droptheme - Marketplace</h4>
+              <div className="text-sm text-gray-600"><WebsiteLink domain="droptheme.com" /></div>
+              <div className="mt-2 text-sm">
+                Tech: Node.js, Next.js, LoopBack 4 — Lead architect; built high-performance digital marketplace
+                with Stripe & PayPal.
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Extra Cart Fee — Shopify Public App</h4>
+              <div className="text-sm text-gray-600">
+                Polaris, Node.js, GraphQL, MySQL — Public app for surcharge/tariff management.
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Completed.com — Social Platform</h4>
+              <div className="text-sm text-gray-600"><WebsiteLink domain="completed.com" /></div>
+              <div className="mt-2 text-sm">
+                Tech: PHP (Yii3), Elasticsearch — Implemented fast search and optimized APIs, reducing response
+                time by 60%.
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="font-semibold">Jungle Jumps — E-commerce</h4>
+              <div className="text-sm text-gray-600">
+                <WebsiteLink domain="www.junglejumps.com" /> • 13 months (completed before deadline)
+              </div>
+              <div className="mt-2 text-sm text-gray-700">
+                <div><strong>Tech:</strong> OScommerce (PHP), MySQL, Stripe, PayPal, JavaScript, Bootstrap</div>
+                <div className="mt-1"><strong>Role (Sr. Software Engineer):</strong> Developed and customized store modules, integrated payment systems, and ensured responsive UI.</div>
+                <div className="mt-1"><strong>Achievements:</strong> Built a multilingual e-commerce store supporting multiple currencies and streamlined checkout for better conversions.</div>
+              </div>
             </div>
 
             <div className="bg-white p-4 rounded-lg shadow">
               <h4 className="font-semibold">Real SEO - Review removal</h4>
               <div className="text-sm text-gray-600">USA-based web application</div>
-              <div className="mt-2 text-sm">Tech: Node.js, Next.js, LoopBack 4. Tool to manage and remove bad reviews from sites.</div>
+              <div className="mt-2 text-sm">
+                Tech: Node.js, Next.js, LoopBack 4. Tool to manage and remove bad reviews from sites.
+              </div>
             </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Bangladesh Yellowbook</h4>
-              <div className="text-sm text-gray-600">bangladeshyellowbook.com</div>
-              <div className="mt-2 text-sm">Tech: Laravel, MySQL, Bootstrap — Business directory platform.</div>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">DeshiBiz - Directory</h4>
-              <div className="text-sm text-gray-600">deshibiz.com</div>
-              <div className="mt-2 text-sm">Tech: CakePHP, MySQL, Bootstrap — Business listing and profiles.</div>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Gold Belly - E-commerce</h4>
-              <div className="text-sm text-gray-600">goldbelly.com</div>
-              <div className="mt-2 text-sm">Tech: Next.js, MUI, MySQL, Stripe — Gourmet food & delivery platform.</div>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Phoenix Card - E-commerce</h4>
-              <div className="text-sm text-gray-600">phoenitcg.com</div>
-              <div className="mt-2 text-sm">Tech: WordPress, WooCommerce, Stripe — Online store build.</div>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Droptheme - Marketplace</h4>
-              <div className="text-sm text-gray-600">droptheme.com</div>
-              <div className="mt-2 text-sm">Tech: Node.js, Next.js, LoopBack 4 — Lead architect; built high-performance digital marketplace with Stripe & PayPal.</div>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Extra Cart Fee — Shopify Public App</h4>
-              <div className="text-sm text-gray-600">Polaris, Node.js, GraphQL, MySQL — Public app for surcharge/tariff management.</div>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Completed.com — Social Platform</h4>
-              <div className="text-sm text-gray-600">completed.com</div>
-              <div className="mt-2 text-sm">Tech: PHP (Yii3), Elasticsearch — Implemented fast search and optimized APIs, reducing response time by 60%.</div>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold">Jungle Jumps — E-commerce</h4>
-              <div className="text-sm text-gray-600">junglejumps.com</div>
-              <div className="mt-2 text-sm">Tech: OScommerce, Stripe, PayPal — Multilingual store with multi-currency support.</div>
-            </div>
-          </div>
-        </section>
-
-        {/* Education */}
-        <section className="mt-8 bg-white p-6 rounded-lg shadow">
-          <h3 className="text-xl font-semibold">Education</h3>
-          <div className="mt-3 text-sm text-gray-700">
-            <div><strong>Bangladesh Institute of Science & Technology (BIST)</strong> — MSc. in Computer Science, 2009</div>
-            <div className="mt-2"><strong>Institute of Science & Technology (Under National University)</strong> — BSc. in Computer Science, 2008</div>
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="mt-10 text-center text-sm text-gray-600">© 2025 Md. Nur Islam Khan. Built with ❤️ — Lead Full-Stack Engineer at Dropndot Solutions</footer>
+        <footer className="mt-10 text-center text-sm text-gray-600">© 2025 Md. Nur Islam Khan. Built with ❤️ — Lead Full-Stack Engineer at <WebsiteLink domain="dropndot.com" label="Dropndot Solutions" /></footer>
       </main>
     </div>
   );
